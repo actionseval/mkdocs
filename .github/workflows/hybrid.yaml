@@ -30,4 +30,4 @@ jobs:
       BOOLVAR: 'false'
       COVERAGE_RUN: 'true'
       HATCH_ENV_ACTIVE: test.py3.11-min-req
-      SOURCE_DATE_EPOCH: '0'
+      # SOURCE_DATE_EPOCH: '0'
