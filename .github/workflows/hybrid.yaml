@@ -1,0 +1,33 @@
+name: hybrid
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        python-version:
+          - '3.11'
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          pip install tomli_w==1.2.0
+      - run: |
+          python -m pip install --upgrade hatch
+      - run: |
+          hatch run +py=3.11 test:with-coverage
+      - run: |
+          hatch run +py=3.11 integration:test
+    env:
+      BOOLVAR: 'false'
+      COVERAGE_RUN: 'true'
+      HATCH_ENV_ACTIVE: test.py3.11-min-req
+      SOURCE_DATE_EPOCH: '0'

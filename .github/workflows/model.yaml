@@ -1,0 +1,26 @@
+name: model
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade hatch
+          python -m pip install babel black click codespell colorama ghp-import importlib-metadata isort Jinja2 Markdown markupsafe mergedeep mkdocs-get-deps mypy packaging pathspec PyYAML pyyaml_env_tag ruff types-Markdown types-pytz types-PyYAML types-setuptools typing-extensions watchdog
+
+      - name: Run tests
+        run: |
+          hatch run +py=3.11 test:with-coverage
+          hatch run +py=3.11 integration:test
