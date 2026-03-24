@@ -43,7 +43,7 @@ jobs:
       LC_CTYPE: C.UTF-8
       POWERSHELL_DISTRIBUTION_CHANNEL: GitHub-Actions-ubuntu22
       SHLVL: '1'
-      SOURCE_DATE_EPOCH: '0'
+      # SOURCE_DATE_EPOCH: '0'
       TERM: xterm
       VARNAME: Hello, World!
       _PYI_LINUX_PROCESS_NAME: sawra
